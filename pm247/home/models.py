@@ -22,7 +22,7 @@ class Engineer_Availability(models.Model):
     jobs = models.ManyToManyField(Job_Type)
     cities = models.ManyToManyField(Post_Code)
     rating = models.PositiveIntegerField(default=0)
-    date = models.DateField(null=True)
+    date = models.DateField(null=True,unique=True)
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
 

@@ -254,8 +254,7 @@ def delete_engineer(request,id=id):
 @login_required
 @permission_required('auth.view_user')
 def list_user(request):
-    staff_group = Group.objects.get(name='Staff Users')
-    users=User.objects.filter(groups=staff_group)
+    users=User.objects.filter(is_staff=True)
     data={'users':users}
     return render (request,'users.html',data)
 

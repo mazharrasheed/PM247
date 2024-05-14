@@ -19,6 +19,7 @@ def engineer_profile(request):
 @permission_required('home.add_engineer_availability')
 def add_availability(request):
     if request.method == 'POST':
+        
         form = EngineerAvailabilityForm(request.POST)
         if form.is_valid():
             availability = form.save(commit=False)
@@ -27,7 +28,9 @@ def add_availability(request):
             form.save_m2m()
             return redirect('engrprofile')  # Redirect to a success page
     else:
-        form = EngineerAvailabilityForm()   
+        engr=Engineer_Availability.objects.filter(engineer_id=request.user.id)
+        engr=engr.first()
+        form = EngineerAvailabilityForm(instance=engr)   
     data={'form':form}
     return render(request,"set-availablity.html",data)
 
